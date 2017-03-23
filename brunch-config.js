@@ -41,6 +41,7 @@ exports.config = {
   paths: {
     // Dependencies and current project directories to watch
     watched: [
+      "web/elm/Main.elm",
       "web/static",
       "test/static"
     ],
@@ -51,6 +52,11 @@ exports.config = {
 
   // Configure your plugins
   plugins: {
+    elmBrunch: {
+      elmFolder: "web\/elm",
+      mainModules: ["Main.elm"],
+      outputFolder: "..\/static\/js",
+    },
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
