@@ -1,0 +1,9 @@
+<div class="row marketing">
+
+  <div class="col-lg-6">
+    <h4>Help2</h4>
+    <div id="messages"></div>
+    <input id="chat-input" type="text"></input>
+  </div>
+
+</div>
