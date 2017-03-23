@@ -20,7 +20,6 @@ defmodule ChannelDemo.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(_params, socket) do
-    IO.puts "Connected"
     {:ok, socket}
   end
 

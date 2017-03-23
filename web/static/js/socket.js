@@ -68,10 +68,10 @@ chatInput.addEventListener("keypress", event => {
 
 lobby_channel.on("new_msg", payload => {
   let messageItem = document.createElement("li");
-  messageItem.innerText = `[${Date()}] ${payload.body}`
+  //messageItem.innerText = `[${Date()}] ${payload.body}`
+  messageItem.innerText = `${payload.body}`
   messagesContainer.appendChild(messageItem)
 })
-
 
 lobby_channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })

@@ -11,21 +11,16 @@ import Phoenix.Push
 import Json.Encode as JE
 import Json.Decode as JD exposing (map2, string, field)
 
--- Our model will track a list of messages and the text for our new message to
--- send.  We only support chatting in a single channel for now.
 type alias Model =
     { newMessage : String
     , messages : List ChatMessage
     , phxSocket : Phoenix.Socket.Socket Msg
     }
 
-
 type alias ChatMessage =
     { user : String
     , body : String
     }
-
--- We can either set our new message or join our channel
 
 type Msg
     = SetNewMessage String
@@ -34,8 +29,6 @@ type Msg
     | SendMessage
     | ReceiveChatMessage JE.Value
 
-
--- Basic initial model is straightforward
 initialModel : Model
 initialModel =
     { newMessage = ""
@@ -53,7 +46,6 @@ initPhxSocket =
         |> Phoenix.Socket.withDebug
         |> Phoenix.Socket.on "new_msg" "room:lobby" ReceiveChatMessage
 
--- We'll handle either setting the new message or joining the channel.
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -130,8 +122,6 @@ viewMessage message =
         [ span [ class "body" ] [ text message.body ]
         ]
 
--- Our view will consist of a button to join the lobby, a list of messages, and
--- our text input for crafting our message
 view : Model -> Html Msg
 view model =
     div []
@@ -142,8 +132,6 @@ view model =
             [ input [ placeholder "Message...", onInput SetNewMessage, value model.newMessage ] [] ]
         ]
 
-
--- Wire together the program
 main : Program Never Model Msg
 main =
     Html.program
@@ -153,13 +141,10 @@ main =
         , subscriptions = subscriptions
         }
 
-
--- No subscriptions yet
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Phoenix.Socket.listen model.phxSocket PhoenixMsg
 
--- And here's our init function
 init : ( Model, Cmd Msg )
 init =
     ( initialModel, Cmd.none )

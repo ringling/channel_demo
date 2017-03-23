@@ -10,7 +10,6 @@ defmodule ChannelDemo.RoomChannel do
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
-    IO.puts "IN"
     broadcast! socket, "new_msg", %{body: body}
     {:noreply, socket}
   end
@@ -18,7 +17,6 @@ defmodule ChannelDemo.RoomChannel do
   intercept ["new_msg"]
 
   def handle_out("new_msg", payload, socket) do
-    IO.puts "OUT"
     push socket, "new_msg", payload
     {:noreply, socket}
   end
